@@ -2,13 +2,13 @@
 include "autentica.php";
 include "conecta_mysql.inc";
 
-$cod_admin = $_GET ["cod_admin"];
-$sql= "SELECT * FROM administrador WHERE cod_admin = $cod_admin;";
-$res= mysqli_query($mysqli,$sql);
-$adm = mysqli_fetch_array ($res);
+if(isset($_SESSION['cod_admin'])){
+    $cod_admin = $_SESSION["cod_admin"];
+    $sql= "SELECT * FROM administrador WHERE cod_admin = $cod_admin;";
+    $res= mysqli_query($mysqli,$sql);
+    $adm = mysqli_fetch_array ($res);
+}
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -77,6 +77,13 @@ $adm = mysqli_fetch_array ($res);
                 </div>
             </nav>
 
+            <?php
+              if(isset($_SESSION['msg2'])){
+                  echo $_SESSION['msg2'];
+                  unset($_SESSION['msg2']);
+                }
+            ?> 
+
              
             <div id="cad_adm" class="block">
          <div class="container">
@@ -108,7 +115,7 @@ $adm = mysqli_fetch_array ($res);
                 </div>
 
                 <div class="form-group">
-                    <input type="password" required="required" class="form-control item" name="senha" placeholder="Senha" value="<?php echo  $adm['senha']?>">
+                    <input type="password" required="required" class="form-control item" name="senha" placeholder="Senha">
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-block create-account">Enviar</button>

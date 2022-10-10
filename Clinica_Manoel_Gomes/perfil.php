@@ -48,7 +48,9 @@ include "conecta_mysql.inc";
         <!-- /#sidebar-wrapper -->
 
         <!-- Page Content -->
-        <div id="page-content-wrapper">
+        
+
+        <div id="page-content-wrapper"> 
             <nav class="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4">
                 <div class="d-flex align-items-center">
                     <i class="fas fa-align-left primary-text fs-4 me-3" id="menu-toggle"></i>
@@ -72,7 +74,26 @@ include "conecta_mysql.inc";
                     </ul>
                 </div>
             </nav>
-    
+            
+            <?php
+              if(isset($_SESSION['msg1'])){
+                  echo $_SESSION['msg1'];
+                  unset($_SESSION['msg1']);
+                }
+            ?> 
+            <?php
+              if(isset($_SESSION['msg3'])){
+                  echo $_SESSION['msg3'];
+                  unset($_SESSION['msg3']);
+                }
+            ?>
+            <?php
+                if(isset($_SESSION['msg7'])){
+                    echo $_SESSION['msg7'];
+                    unset($_SESSION['msg7']);
+                }
+            ?>  
+            
            <div id="servicos" class="block">
             <div class="container">
               <div class="row">
@@ -180,8 +201,8 @@ include "conecta_mysql.inc";
               </select>
             </div>
             <div class="form-group">
-              <input type="text" required="required" class="form-control item" id="telefone_adm" name="telefone" placeholder="Telefone">
-              <script type="text/javascript">$("#telefone_adm").mask("(00) 00000-0000");</script>
+              <input type="text" required="required" class="form-control item" id="telefone_func" name="telefone" placeholder="Telefone">
+              <script type="text/javascript">$("#telefone_func").mask("(00) 00000-0000");</script>
             </div>
             <div class="form-group">
                 <input type="date" required="required" class="form-control item" id="data_nasc" name="data_nasc" placeholder="Data de Nascimento">
@@ -194,7 +215,7 @@ include "conecta_mysql.inc";
             </div>
             <div class="form-group">
                 <button type="submit" class="btn btn-block create-account">Registrar</button>
-                <button type="button" onclick="fechar_adm()" class="btn btn-block create-account2">Cancelar</button>
+                <button type="button" onclick="fechar_func()" class="btn btn-block create-account2">Cancelar</button>
             </div>
           </form>
   </div>
@@ -226,6 +247,12 @@ include "conecta_mysql.inc";
                 <div class="form-group">
                     <input type="email" required="required" class="form-control item" id="email" name="email" placeholder="Email">
                 </div>
+                <?php
+                    if(isset($_SESSION['msg1'])){
+                        echo $_SESSION['msg1'];
+                        unset($_SESSION['msg1']);
+                    }
+                ?>
                 <div class="form-group">
                     <input type="password" required="required" class="form-control item" id="senha" name="senha" placeholder="Senha">
                 </div>

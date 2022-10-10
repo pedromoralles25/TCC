@@ -16,6 +16,88 @@ if($operacao == "editar"){
     $email = $_REQUEST["email"]; 
     $senha = $_REQUEST["senha"];
     
+    $sql = "SELECT * FROM funcionario WHERE cod_funcionario != $cod_funcionario;";
+    $res = mysqli_query($mysqli, $sql);
+    $linhas = mysqli_num_rows($res);
+
+    $erro_email = 0;
+    $erro_tel = 0;
+    $erro_crm = 0;
+    $cont = 0;
+
+    for($i=0; $i < $linhas; $i++){
+        $resultado = mysqli_fetch_array($res);
+        
+        if($resultado['email'] == $email){ 
+            $erro_email = 1;
+            $cont ++;
+        }
+        if($resultado['telefone'] == $telefone){
+            $erro_tel = 1;
+            $cont ++;
+        }
+        if($resultado['crm'] == $crm){
+            $erro_crm = 1;
+            $cont ++;
+        }
+        if($cont == 3){
+            $_SESSION['msg4'] = "<div class='alert alert-danger'>E-mail, telefone e CRM já cadastrados</div>";
+
+            $_SESSION['cod_funcinario'] = $cod_funcionario;
+
+            header("Location: altera_funcionario.php");
+            exit;
+        }
+        elseif(($erro_email == 1) && ($erro_tel == 1)){
+            $_SESSION['msg4'] = "<div class='alert alert-danger'>E-mail e telefone já cadastrados</div>";
+
+            $_SESSION['cod_funcinario'] = $cod_funcionario;
+
+            header("Location: altera_funcionario.php");
+            exit;
+        }
+        elseif(($erro_email == 1) && ($erro_crm == 1)){
+            $_SESSION['msg4'] = "<div class='alert alert-danger'>E-mail e CRM já cadastrados</div>";
+
+            $$_SESSION['cod_funcinario'] = $cod_funcionario;
+
+            header("Location: altera_funcionario.php");
+            exit;
+        }
+        elseif(($erro_tel == 1) && ($erro_crm == 1)){
+            $_SESSION['msg4'] = "<div class='alert alert-danger'>Telefone e CRM já cadastrados</div>";
+
+            $_SESSION['cod_funcinario'] = $cod_funcionario;
+
+            header("Location: altera_funcionario.php");
+            exit;
+        }
+        elseif($erro_email == 1){
+            $_SESSION['msg4'] = "<div class='alert alert-danger'>E-mail já cadastrado</div>";
+
+            $_SESSION['cod_funcinario'] = $cod_funcionario;
+
+            header("Location: altera_funcionario.php");
+            exit;
+        }
+        elseif($erro_crm == 1){
+            $_SESSION['msg4'] = "<div class='alert alert-danger'>CRM já cadastrado</div>";
+
+            $_SESSION['cod_funcinario'] = $cod_funcionario;
+
+            header("Location: altera_funcionario.php");
+            exit;
+        }
+        elseif($erro_tel == 1){
+            $_SESSION['msg4'] = "<div class='alert alert-danger'>Telefone já cadastrado</div>";
+
+            $_SESSION['cod_funcinario'] = $cod_funcionario;
+
+            header("Location: altera_funcionario.php");
+            exit;
+        }
+    }
+
     $senha_cript = password_hash($senha, PASSWORD_DEFAULT);
 
     $sql = "UPDATE funcionario SET nome = '$nome', crm = '$crm', especialidade = '$espec',  data_nasc = '$data_nasc', telefone = '$telefone', email = '$email', senha = '$senha_cript'";

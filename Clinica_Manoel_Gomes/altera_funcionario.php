@@ -2,13 +2,22 @@
 include "autentica.php";
 include "conecta_mysql.inc";
 
-$cod_funcionario = $_REQUEST ["cod_funcionario"];
-$sql= "SELECT * FROM funcionario WHERE cod_funcionario = $cod_funcionario;";
-$res= mysqli_query($mysqli,$sql);
-$funcionario = mysqli_fetch_array ($res);
+if(isset($_SESSION['cod_funcionario'])){
+    $cod_funcionario = $_SESSION["cod_funcionario"];
+    $sql= "SELECT * FROM funcionario WHERE cod_funcionario = $cod_funcionario;";
+    $res= mysqli_query($mysqli,$sql);
+    $funcionario = mysqli_fetch_array ($res);
+
+}
+elseif(empty($_SESSION['cod_funcionario'])){
+    $cod_funcionario = $_REQUEST ["cod_funcionario"];
+    $sql= "SELECT * FROM funcionario WHERE cod_funcionario = $cod_funcionario;";
+    $res= mysqli_query($mysqli,$sql);
+    $funcionario = mysqli_fetch_array ($res);
+
+}
+
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -74,6 +83,12 @@ $funcionario = mysqli_fetch_array ($res);
                 </div>
             </nav>
 
+            <?php
+              if(isset($_SESSION['msg4'])){
+                  echo $_SESSION['msg4'];
+                  unset($_SESSION['msg4']);
+                }
+            ?> 
              
             <div id="cad_cliente" class="block">
          <div class="container">
@@ -108,7 +123,7 @@ $funcionario = mysqli_fetch_array ($res);
                 </div>
 
                 <div class="form-group">
-                    <input type="password" required="required" class="form-control item" name="senha" placeholder="Senha" value="<?php echo  $funcionario['senha']?>">
+                    <input type="password" required="required" class="form-control item" name="senha" placeholder="Senha">
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-block create-account">Enviar</button>

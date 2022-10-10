@@ -69,6 +69,14 @@ include "conecta_mysql.inc";
                     </ul>
                 </div>
             </nav>
+
+            <?php
+                if(isset($_SESSION['msg6'])){
+                    echo $_SESSION['msg6'];
+                    unset($_SESSION['msg6']);
+                }
+            ?>
+
     <!-- /#page-content-wrapper -->
 
     <div class="buscar">
@@ -79,7 +87,6 @@ include "conecta_mysql.inc";
                     <i class="fas fa-search"></i>
                    </form>
             </div>
-
 
             <div class="block">
                 <section class="intro">

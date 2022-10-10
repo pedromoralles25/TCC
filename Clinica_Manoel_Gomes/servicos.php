@@ -69,6 +69,7 @@ include "conecta_mysql.inc";
                     </ul>
                 </div>
             </nav>
+
     <!-- /#page-content-wrapper -->
 
     <div class="buscar">

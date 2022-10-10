@@ -39,7 +39,7 @@ session_start()
                Cadastro/Login
               </a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="cadastro_cliente.html">Cadastre-se</a></li>
+                <li><a class="dropdown-item" href="cad_paciente.html">Cadastre-se</a></li>
                 <li><a class="dropdown-item" href="form_login.php">Faça Login</a></li>
               </ul>
               <li class="nav-item">
@@ -66,7 +66,7 @@ session_start()
           <div class="col-md-4 align-self-center mb-md-0 mb-4">
             <h1>Lorem ipsum dolor sit amet</h1>
              <h4 class="mb-4">Etiam blandit libero et velit tincidunt</h4>
-             <a href="cad_paciente.html" class="btn button-primay btn-primary button d-md-inline-block d-block mb-md-0 mb-2 mr-mb-2">Cadastre-se</a>
+             <a href="cad_paciente.php" class="btn button-primay btn-primary button d-md-inline-block d-block mb-md-0 mb-2 mr-mb-2">Cadastre-se</a>
              <a href="form_login.php" class="btn button-primay-outline btn-outline-primary button d-md-inline-block d-block">Login</a>
           </div>
           <div class="col-md-8 align-self-center text-center">
